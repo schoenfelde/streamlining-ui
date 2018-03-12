@@ -14,7 +14,7 @@ const Row = function ({data, fields}) {
         }
     })
     return (
-        <tr>
+        <tr className="rowMargin">
             {cols}
         </tr>
     )

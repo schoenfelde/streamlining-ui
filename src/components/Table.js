@@ -20,7 +20,9 @@ const Table = function (props) {
         <table>
             <TableHeader data={headers} />
             <tbody>
-                <RowData data={props.data} fields={colFields} id={props.id} />
+                {props.data && props.data.length > 0 &&
+                    <RowData data={props.data} fields={colFields} id={props.id} />
+                }
             </tbody>
         </table>
     )

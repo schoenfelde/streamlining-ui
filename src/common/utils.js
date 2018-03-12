@@ -59,7 +59,6 @@ export const generateRandomObj = function (headers, id) {
 		if (h.type === NUM) {
 			result = genNumber(size)
 		} else if (h.type === WORDNUM) {
-			console.log(size)
 			result = genWordNumber(size)
 		} else if (h.type === STRING) {
 			result = genWord(size)

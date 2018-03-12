@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Table from './components/Table'
+import Pagination from './components/Paginition'
 import {generateRandomObjs, NUM, formatDollars, WORDNUM} from './common/utils'
 
 class App extends Component {
@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       objs: []
     }
+    this.getData = this.getData.bind(this)
   }
 
   headers() {
@@ -72,21 +73,10 @@ class App extends Component {
     return headers
   }
 
-  componentWillMount() {
-    setTimeout(() => {
-      let objs = generateRandomObjs(this.headers(), 1800)
-      this.setState({objs: objs})
-    }, 100)
+  getData() {
+    let objs = generateRandomObjs(this.headers(), 30)
+    return objs
   }
-
-  clickButton() {
-    console.log("clicked button")
-  }
-
-  clickDiv() {
-    console.log("DIIVVVSD")
-  }
-
 
   render() {
 
@@ -96,6 +86,13 @@ class App extends Component {
      */
 
 
+     /**
+      * We can have a Pagination Component, one that takes in the Table and manages the list of information given to it
+      * It will be able to do the following
+      *   1. request the next page
+      *     1a. if the informaiton for that next page exists, it will show it automatically
+      *   2. change the page size
+      */
     
 
     return (
@@ -105,8 +102,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="container">
-          <Table data={this.state.objs} headers={this.headers()} id="id" />
+          <Pagination getData={(num) => generateRandomObjs(this.headers(), num)} headers={this.headers()} id="id" />
         </div>
+        <div className="bottom-page"/>
       </div>
     );
   }

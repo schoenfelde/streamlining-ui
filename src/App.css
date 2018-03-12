@@ -26,3 +26,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.pagination-next-button {
+  float: right
+}
+
+.pagination-previous-button {
+  float: left
+}
+
+.bottom-page {
+  height: 100px
+}
+
+.rowMargin {
+  height: 35px
+}
+
+.pagination-buttonsArea {
+  margin: 30px
+}
+
+.paginationButton {
+  margin: 0 10px 0 10px
+}
+
