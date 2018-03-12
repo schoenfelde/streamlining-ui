@@ -1,6 +1,7 @@
 import React from 'react'
 import Table from './Table'
 import PaginationButtons from './PaginationButtons'
+import PaginationButtonArea from './PaginationButtonArea'
 import pagination from '../common/pagination'
 
 class Pagination extends React.Component {
@@ -52,31 +53,10 @@ class Pagination extends React.Component {
   }
 
   render() {
-    let disablePrevious = this.state.currentPage === 1
-    let disableNext = this.state.max === this.state.currentPage
     return (
       <div>
         <Table data={this.state.data} headers={this.props.headers} id="id" />
-        <div className="pagination-buttonsArea">
-          <div className="pagination-previous-button">
-            <button 
-              className="btn btn-primary"
-              onClick={() => this.changeCurrentPage(this.state.currentPage - 1)}
-              disabled={disablePrevious}>
-              {"<--Prev"}
-            </button>
-          </div>
-          <PaginationButtons {...this.state} changeCurrentPage={this.changeCurrentPage} />
-          <div className="pagination-next-button">
-            <button 
-              className="btn-success btn"
-              disabled={disableNext}
-              onClick={() => this.changeCurrentPage(this.state.currentPage + 1)}
-            >
-              {"Next-->"}
-            </button>
-          </div>
-        </div>
+        <PaginationButtonArea {...this.state}/>
       </div>
     )
   }
