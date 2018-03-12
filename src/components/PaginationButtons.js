@@ -31,13 +31,21 @@ const PaginationButtons = function (props) {
     buttonsToMake.push(i)
   }
   let buttons = buttonsToMake.map(i => {
-    return (
-      <button key={"button" + i} className="btn paginationButton" onClick={() => props.changeCurrentPage(i)}>
-        {i}
-      </button>
-    )
+    if (i === props.currentPage) {
+      return (
+        <button key={"button" + i} className="btn paginationButton  btn-primary" >
+          {i}
+        </button>
+      )
+    } else {
+      return (
+        <button key={"button" + i} className="btn paginationButton" onClick={() => props.changeCurrentPage(i)}>
+          {i}
+        </button>
+      )
+    }
   })
-  return <div>
+  return <span>
     {buttons}
     {end < props.max &&
       <span>
@@ -49,7 +57,7 @@ const PaginationButtons = function (props) {
           </button>
       </span>
     }
-  </div>
+  </span>
 }
 
 export default PaginationButtons

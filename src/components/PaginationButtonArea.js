@@ -1,6 +1,14 @@
 import React from 'react'
+import PaginationButtons from './PaginationButtons'
 
-export default PaginationButtonArea = function (props) {
+/**
+ * 
+ * @param {currentPage} props 
+ * @param {max} props
+ * @param {changeCurrentPage} props
+ * @param {numberOfPagesShown} props
+ */
+const PaginationButtonArea = function (props) {
   let disablePrevious = props.currentPage === 1
   let disableNext = props.max === props.currentPage
   return (
@@ -13,15 +21,18 @@ export default PaginationButtonArea = function (props) {
         {"<--Prev"}
       </button>
     </div>
-    <PaginationButtons {...props} changeCurrentPage={props.changeCurrentPage} />
-    <div className="pagination-next-button">
+    <PaginationButtons 
+      {...props} 
+      changeCurrentPage={props.changeCurrentPage}
+    />
       <button 
-        className="btn-success btn"
+        className="pagination-next-button btn-success btn"
         disabled={disableNext}
         onClick={() => props.changeCurrentPage(props.currentPage + 1)}
       >
         {"Next-->"}
       </button>
-    </div>
   </div>)
 }
+
+export default PaginationButtonArea

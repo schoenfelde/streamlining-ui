@@ -1,6 +1,5 @@
 import React from 'react'
 import Table from './Table'
-import PaginationButtons from './PaginationButtons'
 import PaginationButtonArea from './PaginationButtonArea'
 import pagination from '../common/pagination'
 
@@ -34,18 +33,22 @@ class Pagination extends React.Component {
   }
 
   changeCurrentPage(num) {
+    let currentPage = this.state.currentPage
     if (num <= 1) {
-      this.state.currentPage = 1
+      currentPage = 1
     }
     else if (num > this.state.max) {
-      this.state.currentPage += this.state.max
+      currentPage += this.state.max
     } else {
-      this.state.currentPage = num
+      currentPage = num
     }
-    let fetchBegin = this.state.currentPage * this.state.entriesOnPage
+    let fetchBegin = currentPage * this.state.entriesOnPage
     let fetchEnd = fetchBegin + this.state.entriesOnPage
     let data = this.props.getData(fetchBegin, fetchEnd)
-    this.setState({currentPage: this.state.currentPage, data})
+    this.setState({
+      currentPage,
+      data
+    })
 
     this.pagination.getData(this.state.currentPage).then(data => {
       this.setState({data})
@@ -56,7 +59,7 @@ class Pagination extends React.Component {
     return (
       <div>
         <Table data={this.state.data} headers={this.props.headers} id="id" />
-        <PaginationButtonArea {...this.state}/>
+        <PaginationButtonArea {...this.state} changeCurrentPage={this.changeCurrentPage}/>
       </div>
     )
   }
