@@ -58,8 +58,15 @@ class Pagination extends React.Component {
   render() {
     return (
       <div>
-        <Table data={this.state.data} headers={this.props.headers} id="id" />
-        <PaginationButtonArea {...this.state} changeCurrentPage={this.changeCurrentPage}/>
+        <Table 
+          data={this.state.data}
+          headers={this.props.headers}
+          id="id" 
+        />
+        <PaginationButtonArea
+          {...this.state}
+          changeCurrentPage={this.changeCurrentPage}
+        />
       </div>
     )
   }

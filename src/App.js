@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Pagination from './components/Paginition'
+import Pagination from './components/Pagination'
 import {generateRandomObjs, NUM, formatDollars, WORDNUM} from './common/utils'
 
 class App extends Component {
