@@ -6,6 +6,7 @@ import RowData from './RowData'
  * 
  * @param {Data} props.data
  * @param {Header} props.headers
+ * @param {headerType} props.headerType
  */
 const Table = function (props) {
     let headers = props.headers.map(h => h.name)
@@ -17,8 +18,8 @@ const Table = function (props) {
         }
     })
     return (
-        <table>
-            <TableHeader data={headers} />
+        <table className="table table-striped table-condensed">
+            <TableHeader data={headers} type={props.headerType} />
             <tbody>
                 <RowData data={props.data} fields={colFields} id={props.id} />
             </tbody>
