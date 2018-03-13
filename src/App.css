@@ -28,11 +28,15 @@
 }
 
 .pagination-next-button {
-  float: right
+  float: right;
+  position: relative;
+  right: 100px
 }
 
 .pagination-previous-button {
-  float: left
+  float: left;
+  position: relative;
+  left: 100px;
 }
 
 .bottom-page {
@@ -44,10 +48,14 @@
 }
 
 .pagination-buttonsArea {
-  margin: 30px
+  margin: 30px;
 }
 
 .paginationButton {
   margin: 0 10px 0 10px
+}
+
+.setTableComponet {
+  margin-top: 5px;
 }
 
