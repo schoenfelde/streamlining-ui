@@ -25,6 +25,13 @@ export default class Pagination {
     })
   }
 
+  remove(id) {
+    let index = this.data.findIndex((obj) => {
+      return obj.id === id
+    })
+    this.data.splice(index, 1)
+  }
+
   hasNoNulls(data) {
     if (data.length > 0) {
       return data.reduce((tf, d) => tf = tf && d !== null)

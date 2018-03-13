@@ -7,6 +7,7 @@ class Pagination extends React.Component {
   /**
    * 
    * @param {getData} props must return the data with the maximum to retrieve
+   * @param {headers} props this is the series of headers that get inserted into the componet
    */
   constructor(props) {
     super(props)
@@ -16,11 +17,20 @@ class Pagination extends React.Component {
       max: 1,
       numberOfPagesShown: 10,
       entriesOnPage: 10,
-      maxNumberOfEntries: 18000
+      maxNumberOfEntries: 1800
     }
     this.state.max = Math.floor(this.state.maxNumberOfEntries - this.state.entriesOnPage)
     this.pagination = new pagination(props.getData, this.state.entriesOnPage, this.state.maxNumberOfEntries)
     this.changeCurrentPage = this.changeCurrentPage.bind(this)
+    this.setHeaders(props.headers)
+  }
+
+  setHeaders(headers) {
+    for(let h of headers) {
+      if (h.component) {
+        h.component = h.component(this)
+      }
+    }
   }
 
   componentWillMount() {
@@ -42,23 +52,20 @@ class Pagination extends React.Component {
     } else {
       currentPage = num
     }
-    let fetchBegin = currentPage * this.state.entriesOnPage
-    let fetchEnd = fetchBegin + this.state.entriesOnPage
-    let data = this.props.getData(fetchBegin, fetchEnd)
-    this.setState({
-      currentPage,
-      data
+    this.pagination.getData(currentPage).then(data => {
+      this.setState({data, currentPage})
     })
+  }
 
-    this.pagination.getData(this.state.currentPage).then(data => {
-      this.setState({data})
-    })
+  remove(id) {
+    this.pagination.remove(id)
+    this.changeCurrentPage(this.state.currentPage)
   }
 
   render() {
     return (
       <div>
-        <Table 
+        <Table
           data={this.state.data}
           headers={this.props.headers}
           id="id" 

@@ -13,25 +13,20 @@ const PaginationButtonArea = function (props) {
   let disableNext = props.max === props.currentPage
   return (
     <div className="pagination-buttonsArea">
-    <div className="pagination-previous-button">
       <button 
         className="btn btn-primary"
         onClick={() => props.changeCurrentPage(props.currentPage - 1)}
-        disabled={disablePrevious}>
-        {"<--Prev"}
-      </button>
-    </div>
-    <PaginationButtons 
-      {...props} 
-      changeCurrentPage={props.changeCurrentPage}
-    />
+        disabled={disablePrevious}
+      >{"<--Prev"}</button>
+      <PaginationButtons 
+        {...props} 
+        changeCurrentPage={props.changeCurrentPage}
+      />
       <button 
-        className="pagination-next-button btn-success btn"
+        className="btn-success btn"
         disabled={disableNext}
         onClick={() => props.changeCurrentPage(props.currentPage + 1)}
-      >
-        {"Next-->"}
-      </button>
+      >{"Next-->"}</button>
   </div>)
 }
 

@@ -7,10 +7,6 @@ import {generateRandomObjs, NUM, formatDollars, WORDNUM} from './common/utils'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      objs: []
-    }
-    this.getData = this.getData.bind(this)
   }
 
   headers() {
@@ -61,23 +57,16 @@ class App extends Component {
       name: "Delete",
       key: "id",
       // SHOW seperate the Delete Button from the Props Component
-      component: function (props) {
-        let deleteTheObject = () => {
-          let index = that.state.objs.findIndex((obj) => {
-            return obj.id === props.data.id
-          })
-          that.state.objs.splice(index, 1)
-          that.setState(that.state)
+      component: function (pagination) {
+        return function (props) {
+          let deleteTheObject = () => {
+            pagination.remove(props.data.id)
+          }
+          return <button className="setTableComponet" onClick={() => deleteTheObject()}>DELETE</button>
         }
-        return <button className="setTableComponet" onClick={() => deleteTheObject()}>DELETE</button>
       }
     }]
     return headers
-  }
-
-  getData() {
-    let objs = generateRandomObjs(this.headers(), 30)
-    return objs
   }
 
   render() {
