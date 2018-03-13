@@ -22,7 +22,6 @@ class StreamlinedTable extends React.Component {
     }
     // defaults to 10 per page
     let defaultPageSize = props.defaultPageSize || 10
-    debugger
     this.pagination = new PaginationCollection(defaultPageSize, props.maxSize, props.fetchData);
   }
 
