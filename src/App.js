@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Pagination from './components/Pagination'
+import StreamlinedTable from './components/StreamlinedTable'
 import {generateRandomObjs, NUM, formatDollars, WORDNUM} from './common/utils'
 
 class App extends Component {
@@ -78,14 +78,13 @@ class App extends Component {
       name: "Delete",
       key: "id",
       // SHOW seperate the Delete Button from the Props Component
-      component: function (pagination) {
-        return function (props) {
+      component: function (props) {
           let deleteTheObject = () => {
+            let pagination = {remove:() => 1}
             pagination.remove(props.data.id)
           }
           return <button className="setTableComponet" onClick={() => deleteTheObject()}>DELETE</button>
         }
-      }
     }]
     return headers
   }
@@ -100,7 +99,16 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="container">
-          <Pagination getData={(num) => generateRandomObjs(this.generateData(), num)} headers={this.headers()} id="id" />
+          <StreamlinedTable
+            maxSize={10000}
+            fetchData={(num) => {
+              return new Promise((resolver, rejector) => {
+                resolver(generateRandomObjs(this.generateData(), num))
+              })
+            }}
+            headers={this.headers()}
+            id="id" 
+          />
         </div>
         <div className="bottom-page"/>
       </div>

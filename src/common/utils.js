@@ -2,7 +2,11 @@ export const NUM = 1
 export const STRING = 2
 export const WORDNUM = 3
 
+<<<<<<< HEAD
 let globalCount = 0
+=======
+let globalCount = 1
+>>>>>>> streamlining
 
 /**
  * generates a random word, of length size
