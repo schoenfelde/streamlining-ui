@@ -2,6 +2,8 @@ export const NUM = 1
 export const STRING = 2
 export const WORDNUM = 3
 
+let globalCount = 0
+
 /**
  * generates a random word, of length size
  * @param {*} size 
@@ -81,8 +83,10 @@ export const generateRandomObj = function (headers, id) {
 export const generateRandomObjs = function (headers, num) {
 	let objects = []
 	for (let i = 0; i < num; i++) {
-		objects.push(generateRandomObj(headers, i))
+		globalCount++
+		objects.push(generateRandomObj(headers, globalCount))
 	}
+	globalCount++
 	return objects
 }
 

@@ -14,20 +14,41 @@ export default class Pagination {
       let start = (page - 1) * this.numberOnPage
       let end = start + this.numberOnPage
       let pageIsInData = this.fromTo(start, end)
-      if (this.hasNoNulls(pageIsInData)) {
-        resolver(pageIsInData)
-      } else {
-        let data = this.fetch(this.numberOnPage)
-        this.pushUntilStart(start)
-        this.data.push.apply(this.data, data)
-        resolver(data)
-      }
+      this.recursiveDataGetter(resolver, pageIsInData, start, end)
     })
+  }
+
+  recursiveDataGetter(resolver, pageIsInData, start, end) {
+    let hasNoNulls = this.hasNoNulls(pageIsInData)
+    let lengthIslargerThanEnd = this.data.length > end
+    if (hasNoNulls && this.containsAFullPage(pageIsInData)) {
+      resolver(pageIsInData)
+    } else if (!this.containsAFullPage(pageIsInData) && hasNoNulls && lengthIslargerThanEnd) {
+      end++
+      pageIsInData = this.fromTo(start, end)
+      this.recursiveDataGetter(resolver, pageIsInData, start, end)
+    } else {
+      let data = this.fetch(this.numberOnPage)
+      this.pushUntilStart(start)
+      let current = 0
+      for(let i = start; i <= end; i++) {
+        if (this.data[i] === null) {
+          this.data[i] = data[current]
+          current++
+        }
+      }
+      this.data.push.apply(this.data, data)
+      resolver(this.data.slice(start, end))
+    }
+  }
+
+  containsAFullPage(list) {
+    return list.length === this.numberOnPage
   }
 
   remove(id) {
     let index = this.data.findIndex((obj) => {
-      return obj.id === id
+      return obj !== null && obj.id === id
     })
     this.data.splice(index, 1)
   }
