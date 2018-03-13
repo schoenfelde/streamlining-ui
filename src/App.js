@@ -79,7 +79,7 @@ class App extends Component {
         </header>
         <div className="container">
           <StreamlinedTable
-            maxSize={1000}
+            maxSize={10000}
             fetchData={(num) => {
               return new Promise((resolver, rejector) => {
                 resolver(generateRandomObjs(this.headers(), num))

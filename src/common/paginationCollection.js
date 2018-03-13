@@ -107,11 +107,11 @@ class PaginationCollectionDS {
 
 	getCurrentPageItems() {
 		let currentPage = this.page.currentPage;
-		let items = this.items[currentPage];
+		let items = this.items[Number(currentPage)];
 		if (items === undefined) {
-      this.items[currentPage] = null;
+      this.items[Number(currentPage)] = null;
 			return this.getPageItems(this.sizeOfPage).then(pageItems => {
-				this.items[currentPage] = pageItems;
+				this.items[Number(currentPage)] = pageItems;
 				return pageItems;
 			});
 		}
@@ -125,7 +125,7 @@ class PaginationCollectionDS {
 	currentNumberOfPagesImmediately() {
 		let count = 0;
 		for(let key in this.items) {
-			let i = this.items[key];
+			let i = this.items[Number(key)];
 			if (i && i !== null) {
 				count++;
 			}
@@ -136,7 +136,7 @@ class PaginationCollectionDS {
 	numberOfPagesWaiting() {
 		let count = 0;
 		for(let key in this.items) {
-			let i = this.items[key];
+			let i = this.items[Number(key)];
 			if (i === null) {
 				count++;
 			}
@@ -157,7 +157,10 @@ class PaginationCollectionDS {
 			if (this.atLastPage()) {
 				return;
 			}
-			listOfPromises.push(this.goToPage(lastPage + i));
+			let pageToLoad = lastPage + i
+			// console.log({lastPage, i, pageToLoad, numOfPages})
+			listOfPromises.push(this.goToPage(pageToLoad));
+			i++
 		}
 		return listOfPromises;
 	}
@@ -180,7 +183,7 @@ class PaginationCollectionDS {
 		let keys = [];
 		for(let key in this.items) {
 			if (key <= pageNum) {
-				keys.push(key);
+				keys.push(Number(key));
 			}
 		}
 		return this._getItemsInKeys(keys);
@@ -188,16 +191,16 @@ class PaginationCollectionDS {
 
 	getAllItems() {
 		let keys = [];
-		for(let key in this.items) {
-			keys.push(key);
+		for(let key of Object.keys(this.items)) {
+			keys.push(Number(key));
 		}
 		return this._getItemsInKeys(keys);
 	}
 
 	_getItemsInKeys(keys) {
 		let all = [];
-		keys = keys.sort();
-		for(let key of keys) {
+		let sorted = keys.sort((a,b) =>  a - b);
+		for(let key of sorted) {
 			let i = this.items[key];
 			if (i === null || i === undefined) {
 				continue;
