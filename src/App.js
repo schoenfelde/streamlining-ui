@@ -58,6 +58,7 @@ class App extends Component {
     }, {
       name: "Delete",
       key: "id",
+      // SHOW seperate the Delete Button from the Props Component
       component: function (props) {
         let deleteTheObject = () => {
           let index = that.state.objs.findIndex((obj) => {
@@ -79,25 +80,8 @@ class App extends Component {
     }, 100)
   }
 
-  clickButton() {
-    console.log("clicked button")
-  }
-
-  clickDiv() {
-    console.log("DIIVVVSD")
-  }
-
-
   render() {
-
-    /**
-     * 1. lets create some random data for the table
-     * 2. have some more fields
-     */
-
-
-    
-
+    // SHOW how to make the table into a sortable table with the headers
     return (
       <div className="App">
         <header className="App-header">
