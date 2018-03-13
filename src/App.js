@@ -79,22 +79,6 @@ class App extends Component {
   }
 
   render() {
-
-    /**
-     * 1. lets create some random data for the table
-     * 2. have some more fields
-     */
-
-
-     /**
-      * We can have a Pagination Component, one that takes in the Table and manages the list of information given to it
-      * It will be able to do the following
-      *   1. request the next page
-      *     1a. if the informaiton for that next page exists, it will show it automatically
-      *   2. change the page size
-      */
-    
-
     return (
       <div className="App">
         <header className="App-header">
