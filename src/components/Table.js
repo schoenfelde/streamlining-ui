@@ -1,6 +1,7 @@
 import React from 'react'
 import TableHeader from './TableHeader'
 import RowData from './RowData'
+import ScrollingHOC from './ScrollingHOC'
 
 /**
  * 
@@ -30,3 +31,5 @@ const Table = function (props) {
 }
 
 export default Table
+
+export const StreamlinedTable = ScrollingHOC(Table)

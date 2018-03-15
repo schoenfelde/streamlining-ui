@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import StreamlinedTable from './components/StreamlinedTable'
+// import StreamlinedTable from './components/StreamlinedTable'
 import {generateRandomObjs, NUM, formatDollars, WORDNUM} from './common/utils'
+import {StreamlinedTable} from './components/Table'
 
 class App extends Component {
   constructor(props) {
@@ -100,15 +101,13 @@ class App extends Component {
         </header>
         <div className="container">
           <StreamlinedTable
-            maxSize={10000}
             fetchData={(num) => {
               return new Promise((resolver, rejector) => {
                 resolver(generateRandomObjs(this.generateData(), num))
               })
             }}
             headers={this.headers()}
-            id="id" 
-          />
+            id="id" />
         </div>
         <div className="bottom-page"/>
       </div>

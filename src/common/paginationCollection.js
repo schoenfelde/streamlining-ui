@@ -158,7 +158,6 @@ class PaginationCollectionDS {
 				return;
 			}
 			let pageToLoad = lastPage + i
-			// console.log({lastPage, i, pageToLoad, numOfPages})
 			listOfPromises.push(this.goToPage(pageToLoad));
 			i++
 		}
